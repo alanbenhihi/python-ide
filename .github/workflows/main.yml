@@ -16,9 +16,12 @@ jobs:
       - name: Clone repository
         run: git clone https://github.com/duongpokeeeee/articial-in
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
       - name: Run the Node.js app
         run: |
           cd articial-in
-          ls
-          python
-          python3
+          bash start2.sh
