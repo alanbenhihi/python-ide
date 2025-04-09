@@ -19,4 +19,6 @@ jobs:
       - name: Run the Node.js app
         run: |
           cd articial-in
-          bash start2.sh
+          ls
+          python -v
+          python3 -v
