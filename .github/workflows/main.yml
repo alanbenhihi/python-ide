@@ -20,5 +20,5 @@ jobs:
         run: |
           cd articial-in
           ls
-          python -v
-          python3 -v
+          python
+          python3
